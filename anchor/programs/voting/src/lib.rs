@@ -8,7 +8,19 @@ declare_id!("AsjZ3kWAUSQRNt2pZVeJkywhZ6gpLpHZmJjduPmKZDZZ");
 pub mod voting {
     use super::*;
 
-    pub fn initialise_poll(_ctx: Context<InitialisePoll>, _poll_id: u64) -> Result<()> {
+    pub fn initialise_poll(
+        ctx: Context<InitialisePoll>,
+        poll_id: u64,
+        description: String,
+        poll_start: u64,
+        poll_end: u64,
+        // candidate_amount: u64,
+    ) -> Result<()> {
+        let poll = &mut ctx.accounts.poll;
+        poll.poll_id = poll_id;
+        poll.poll_start = poll_start;
+        poll.poll_end = poll_end;
+        poll.description = description;
         Ok(())
     }
 }
